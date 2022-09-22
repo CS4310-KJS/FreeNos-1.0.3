@@ -7,7 +7,7 @@
  * @addtogroup bin
  * @{
  */
-
+ 
 class Wait : public POSIXApplication
 {
     public:
