@@ -22,6 +22,8 @@
 #include "sys/wait.h"
 #include "sys/types.h"
 #include <errno.h>
+#include <ProcessClient.h>
+#include "ProcessList.h"
 
 pid_t waitpid(pid_t pid, int *stat_loc, int options)
 {
