@@ -5,8 +5,7 @@
 #include "sys/wait.h"
 #include "sys/types.h"
 #include <errno.h>
-#include <ProcessClient.h>
-#include "ProcessList.h"
+
 
 
 #include <POSIXApplication.h>
