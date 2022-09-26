@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include "Wait.h"
 #include <ProcessClient.h>
-#include "ProcessList.h"
+
 
 Wait::Wait(int argc, char **argv)
     : POSIXApplication(argc, argv)
@@ -24,7 +24,7 @@ Wait::Result Wait::exec()
     int status;
     const ProcessClient process;
 
-    if (((pid = atoi(arguments().get("PID"))) <= 0)||(pid < ProcessClient::MaximumProcesses))
+    if (((pid = atoi(arguments().get("PID"))) < 0)||(pid > ProcessClient::MaximumProcesses))
     {
         ERROR("PID not found '" << arguments().get("PID") << "'");
         return NotFound;
