@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2009 Niek Linnenbank
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -43,7 +43,7 @@ ListFiles::~ListFiles()
 
 ListFiles::Result ListFiles::exec()
 {
-    const Vector<Argument *> & positionals = arguments().getPositionals();
+    const Vector<Argument *> &positionals = arguments().getPositionals();
     Result result = Success, ret = Success;
 
     // List files provided on the command-line, if any
@@ -73,7 +73,7 @@ ListFiles::Result ListFiles::exec()
     return ret;
 }
 
-ListFiles::Result ListFiles::printFiles(const String & path) const
+ListFiles::Result ListFiles::printFiles(const String &path) const
 {
     struct dirent *dent;
     struct stat st;
@@ -104,7 +104,7 @@ ListFiles::Result ListFiles::printFiles(const String & path) const
         {
             // Construct full path
             snprintf(tmp, sizeof(tmp),
-                    "%s/%s", *path, dent->d_name);
+                     "%s/%s", *path, dent->d_name);
 
             if ((r = printSingleFile(tmp, out)) != Success)
                 break;
@@ -124,12 +124,12 @@ ListFiles::Result ListFiles::printFiles(const String & path) const
 
     // Write to standard output
     write(1, *out, out.length());
-    
+
     // Success
     return r;
 }
 
-ListFiles::Result ListFiles::printSingleFile(const String & path, String & out) const
+ListFiles::Result ListFiles::printSingleFile(const String &path, String &out) const
 {
     const bool color = arguments().get("no-color") == ZERO;
     struct stat st;
@@ -184,7 +184,7 @@ ListFiles::Result ListFiles::printSingleFile(const String & path, String & out) 
             out << WHITE;
     }
 
-    out << basename((char *) *path) << " ";
+    out << basename((char *)*path) << " ";
 
     if (color)
     {

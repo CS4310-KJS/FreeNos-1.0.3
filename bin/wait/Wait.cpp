@@ -24,12 +24,14 @@ Wait::Result Wait::exec()
     int status;
     const ProcessClient process;
 
+    // returns error if PID is not between 0 and the maximum number of processes on the Process List
     if (((pid = atoi(arguments().get("PID"))) < 0)||(pid > ProcessClient::MaximumProcesses))
     {
         ERROR("PID not found '" << arguments().get("PID") << "'");
         return NotFound;
     }
 
+    // Call waitpid
     waitpid(pid, &status, 0);
 
     return Success;
