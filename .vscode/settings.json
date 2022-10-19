@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "bitset": "cpp",
+        "functional": "cpp",
+        "random": "cpp",
+        "future": "cpp",
+        "mutex": "cpp",
+        "ostream": "cpp",
+        "stop_token": "cpp",
+        "streambuf": "cpp",
+        "*.def": "cpp"
+    }
+}
