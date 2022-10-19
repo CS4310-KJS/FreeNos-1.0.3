@@ -71,12 +71,12 @@ class Process
         Stopped
     };
 
-    enum PriorityLevels
+    enum PriorityLevel
     {
         Min = 1,
         Default = 3,
         Max = 5
-    }
+    };
 
   public:
 
@@ -117,6 +117,13 @@ class Process
     /**
      * Get wait result
      */
+
+    /**
+     *  Get Priority
+     */
+
+    PriorityLevel getPriority() const;
+
     uint getWaitResult() const;
 
     /**
@@ -248,6 +255,13 @@ class Process
      */
     void setParent(ProcessID id);
 
+    /**
+     * Set priority level
+     */
+    void setPriority(PriorityLevel PriorityLevel);
+
+
+
   protected:
 
     /** Process Identifier */
@@ -266,7 +280,7 @@ class Process
     uint m_waitResult;
 
     /** Priority Level **/
-    PriorityLevels m_priority;
+    PriorityLevel m_priority;
 
     /** Privilege level */
     bool m_privileged;
