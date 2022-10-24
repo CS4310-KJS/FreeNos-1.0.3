@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2009 Niek Linnenbank
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 #ifndef __BIN_RENICE_RENICE_H
 #define __BIN_RENICE_RENICE_H
 
@@ -26,11 +9,11 @@
  */
 
 /**
- * Wait for a process to terminate
+ * Output the system process list.
  */
-class Renice : public POSIXApplication
+class renice : public POSIXApplication
 {
-public:
+  public:
 
     /**
      * Constructor
@@ -38,12 +21,12 @@ public:
      * @param argc Argument count
      * @param argv Argument values
      */
-    Renice(int argc, char **argv);
+    renice(int argc, char **argv);
 
     /**
      * Destructor
      */
-    virtual ~Renice();
+    virtual ~renice();
 
     /**
      * Execute the application.
@@ -57,4 +40,4 @@ public:
  * @}
  */
 
-#endif /* __BIN_RENICE_RENICE_H */
+#endif /* __BIN_PS_PROCESSLIST_H */
