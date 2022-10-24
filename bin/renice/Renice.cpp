@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2009 Niek Linnenbank
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -15,19 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 #include <unistd.h>
-#include <ProcessClient.h>
 #include "Renice.h"
+
+#include <ProcessClient.h>
 
 Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
-    parser().setDescription("Change the priority level of a process.");
-    parser().registerFlag('n', "change-priority", "Specifies the new priority of the process");
-    parser().registerPositional("PRIORITY", "New priority of the process");
-    parser().registerPositional("PROCESS-ID", "Process ID of the process to change priority of");
+    parser().setDescription("Change the priority of a process");
+    parser().registerFlag('n', "new", "Changes process priority");
+    parser().registerPositional("PRIO", "The new priority for the process");
+    parser().registerPositional("PID", "The ID of the process to change the priority of");
 }
 
 Renice::~Renice()
@@ -36,19 +39,34 @@ Renice::~Renice()
 
 Renice::Result Renice::exec()
 {
-    PriorityLevel pl = atoi(arguments().get("PRIORITY"));
-    ProcessID process_id = atoi(arguments().get("PROCESS-ID"));
-    const ProcessClient p_client;
-    if(pl > 5) {
-    	ERROR("Invalid Priority Level `" << pl << "'");
-    	return InvalidArgument;
+    // Get input as integer
+    if (arguments().get("new")){
+
+        int prio = atoi(arguments().get("PRIO"));
+        int pid = atoi(arguments().get("PID"));
+
+        const ProcessClient process;
+        ProcessClient::Info info;
+
+        // Make sure the process is valid
+        const ProcessClient::Result result = process.processInfo(pid, info);
+        if (result == ProcessClient::Success)
+        {
+            // Valid process
+            if(renice(pid, prio)) 
+            {
+                ERROR("failed to change priority: " << strerror(errno));
+                return IOError;
+            }
+        }
+
+        else
+        {
+            // Invalid process - return an error
+            ERROR("invalid process id: " << arguments().get("PID") << "'");
+            return IOError;
+        }
+
     }
-    const ProcessClient::Result success = p_client.renicePID(process_id, pl);
-    if(success != ProcessClient::Success) {
-    	ERROR("Could not set priority `" << pl << "' for PID `" << process_id << "'");
-    	return NotFound;
-    } 
-   
     return Success;
 }
-
