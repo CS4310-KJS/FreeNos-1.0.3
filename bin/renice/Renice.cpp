@@ -4,7 +4,7 @@
 #include <ProcessClient.h>
 #include <unistd.h>
 #include <Process.h>
-#include "renice.h"
+#include "Renice.h"
 
 int prio;
 ProcessID pid;
