@@ -14,4 +14,4 @@ Shaghik Issakhani: Worked on Part 3
 2. Repo Link: https://github.com/CS4310-KJS/FreeNos-1.0.3/tree/priority
 
 
-3. Video Link: 
+3. Video Link: https://youtu.be/iLUMbNvBUeY
