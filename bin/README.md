@@ -4,11 +4,11 @@ Project 3: Prioritize it...
 
 Team members:
 
-Jared Molina
+Jared Molina: Worked on part 1, 2, and fixed all the implementation errors.
 
-Kyra Mercado
+Kyra Mercado: Worked on Part 4
 
-Shaghik Issakhani
+Shaghik Issakhani: Worked on Part 3
 
 
 2. Repo Link: https://github.com/CS4310-KJS/FreeNos-1.0.3/tree/priority
