@@ -60,7 +60,7 @@ ProcessList::Result ProcessList::exec()
             if(arguments().get("Priority") != ZERO){
                 snprintf(line, sizeof(line),
                     "%3d %9d %7d %4d %5d %10s %32s\r\n",
-                     pid, info.priorityLevel, info.kernelState.parent,
+                     pid, info.kernelState.priorityLevel, info.kernelState.parent,
                      0, 0, *info.textState, *info.command);
 
             }else{

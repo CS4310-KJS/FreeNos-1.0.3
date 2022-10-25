@@ -66,8 +66,7 @@ public:
     /** Textual state of the process */
     String textState;
 
-    /** Integer value for Priority **/
-    PriorityLevel priorityLevel;
+
   } Info;
 
 public:

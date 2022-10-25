@@ -54,7 +54,6 @@
  */
 extern C pid_t getpid();
 
-extern pid_t renice(pid_t pid, unsigned int priority);
 
 /**
  * Get parent process ID.
@@ -231,7 +230,7 @@ extern C unsigned int sleep(unsigned int seconds);
  *
  * @return Process ID of the process on success or -1 on error
  */
-extern C pid_t setprio(pid_t pid, unsigned int priority, int options);
+extern C pid_t changePriority(pid_t pid, PriorityLevel priority, int options);
 
 /**
  * @}

@@ -72,7 +72,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
     }
 
     Size count;
-    switch(proc->getPriority()) {//where is this function?
+    switch(proc->getPriority()) {
 
         case 1: 
             count = m_queue_min.count();
@@ -123,24 +123,24 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
             switch(proc->getPriority()) {
 
                 case 1: 
-                    m_queue_min.push(proc);
-                    return Success; 
+                    m_queue_min.push(p);
+                  
                     break;
                 case 2: 
-                    m_queue_lower.push(proc);   
-                    return Success; 
+                    m_queue_lower.push(p);   
+                
                     break;
                 case 3: 
-                    m_queue_default.push(proc); 
-                    return Success; 
+                    m_queue_default.push(p); 
+                  
                     break;
                 case 4: 
-                    m_queue_higher.push(proc);  
-                    return Success; 
+                    m_queue_higher.push(p);  
+                  
                     break;
                 case 5: 
-                    m_queue_max.push(proc);     
-                    return Success; 
+                    m_queue_max.push(p);     
+                 
                     break;
 
             }
@@ -153,63 +153,51 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 Process * Scheduler::select()
 {
 
-    switch(proc->getPriority()) {
-
-        case 1: 
-            if (m_queue_min.count() > 0)
-            {
-                Process *p = m_queue_min.pop();
-                m_queue_min.push(p);
-
-                return p;
-            }
-            break;
-        case 2: 
-            if (m_queue_lower.count() > 0)
-            {
-                Process *p = m_queue_lower.pop();
-                m_queue_lower.push(p);
-
-                return p;
-            }
-            break;
-        case 3: 
-            if (m_queue_default.count() > 0)
-            {
-                Process *p = m_queue_default.pop();
-                m_queue_default.push(p);
-
-                return p;
-            }
-            break;
-        case 4: 
-            if (m_queue_higher.count() > 0)
-            {
-                Process *p = m_queue_higher.pop();
-                m_queue_higher.push(p);
-
-                return p;
-            }
-            break;
-        case 5: 
-            if (m_queue_max.count() > 0)
-            {
-                Process *p = m_queue_max.pop();
-                m_queue_max.push(p);
-
-                return p;
-            }
-            break;
-
-    }
-    
-    /**if (m_queue.count() > 0)
+    if (m_queue_max.count() > 0)
     {
-        Process *p = m_queue.pop();
-        m_queue.push(p);
+        Process *p = m_queue_higher.pop();
+        m_queue_higher.push(p);
 
         return p;
-    }*/
+    }
+     if (m_queue_higher.count() > 0)
+    {
+        Process *p = m_queue_higher.pop();
+        m_queue_higher.push(p);
 
+        return p;
+    }
+    if (m_queue_default.count() > 0)
+    {
+        Process *p = m_queue_default.pop();
+        m_queue_default.push(p);
+
+        return p;
+    }
+
+     if (m_queue_default.count() > 0)
+    {
+        Process *p = m_queue_default.pop();
+        m_queue_default.push(p);
+
+            return p;
+    }
+
+    if (m_queue_lower.count() > 0)
+    {
+        Process *p = m_queue_lower.pop();
+        m_queue_lower.push(p);
+
+        return p;
+    }
+
+    if (m_queue_min.count() > 0)
+    {
+        Process *p = m_queue_min.pop();
+                m_queue_min.push(p);
+
+        return p;
+    }
+       
     return (Process *) NULL;
 }

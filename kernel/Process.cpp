@@ -27,7 +27,6 @@ Process::Process(ProcessID id, Address entry, bool privileged, const MemoryMap &
     : m_id(id), m_map(map), m_shares(id)
 {
     m_state         = Stopped;
-    m_priority      = Default;
     m_parent        = 0;
     m_waitId        = 0;
     m_waitResult    = 0;
@@ -36,6 +35,7 @@ Process::Process(ProcessID id, Address entry, bool privileged, const MemoryMap &
     m_privileged    = privileged;
     m_memoryContext = ZERO;
     m_kernelChannel = ZERO;
+    m_priority      = DefaultPriority;
     MemoryBlock::set(&m_sleepTimer, 0, sizeof(m_sleepTimer));
 }
 
@@ -77,13 +77,13 @@ uint Process::getWaitResult() const
 {
     return m_waitResult;
 }
-
-Process::PriorityLevel Process:: getPriority() const
-{
+ 
+ Process::PriorityLevel Process::getPriority() const
+ {
     return m_priority;
-}
+ }
 
-void Process::setPriority(PriorityLevel priorityLevel){
+void Process:: setPriority(PriorityLevel priorityLevel){
     m_priority = priorityLevel;
 }
 Process::State Process::getState() const

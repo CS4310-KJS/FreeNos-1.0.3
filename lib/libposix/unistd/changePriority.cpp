@@ -13,7 +13,7 @@ pid_t changePriority(pid_t pid, PriorityLevel priority, int options)
         errno = ESRCH;
         return (pid_t) -1;
     }
-    info.priority = priority;
+    info.kernelState.priorityLevel = priority;
 
     const ulong result = (ulong) ProcessCtl(pid, SetPriority, (Address) &info.kernelState);
 

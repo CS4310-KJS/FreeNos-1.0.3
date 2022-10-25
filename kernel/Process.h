@@ -74,7 +74,9 @@ class Process
     enum PriorityLevel
     {
         Min = 1,
-        Default = 3,
+        Lower = 2,
+        DefaultPriority = 3,
+        Higher =4,
         Max = 5
     };
 
@@ -118,11 +120,6 @@ class Process
      * Get wait result
      */
 
-    /**
-     *  Get Priority
-     */
-
-    PriorityLevel getPriority() const;
 
     uint getWaitResult() const;
 
@@ -162,6 +159,16 @@ class Process
      * @return True if equal, false otherwise.
      */
     bool operator == (Process *proc);
+
+    /**
+     *  Get Priority
+     */
+    PriorityLevel getPriority() const;
+
+    /**
+     * Set priority level
+     */
+    void setPriority(PriorityLevel);
 
   protected:
 
@@ -255,10 +262,7 @@ class Process
      */
     void setParent(ProcessID id);
 
-    /**
-     * Set priority level
-     */
-    void setPriority(PriorityLevel PriorityLevel);
+    
 
 
 
