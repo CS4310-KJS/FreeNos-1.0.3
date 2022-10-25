@@ -4,7 +4,9 @@ Project 3: Prioritize it...
 
 Team members:
 Jared Molina
+
 Kyra Mercado
+
 Shaghik Issakhani
 
 
