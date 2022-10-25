@@ -37,7 +37,7 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
         return InvalidArgument;
     }
 
-    switch(proc->getPriority()) {//where is this function?
+    switch(proc->getPriority()) {
 
         case 1: 
             m_queue_min.push(proc);
@@ -97,7 +97,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
     for (Size i = 0; i < count; i++)
     {
         Process *p;
-        switch(proc->getPriority()) {//where is this function?
+        switch(proc->getPriority()) {
 
         case 1: 
             p = m_queue_min.pop();
@@ -120,7 +120,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
         if (p == proc)
             return Success;
         else
-            switch(proc->getPriority()) {//where is this function?
+            switch(proc->getPriority()) {
 
                 case 1: 
                     m_queue_min.push(proc);
@@ -153,7 +153,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 Process * Scheduler::select()
 {
 
-    switch(proc->getPriority()) {//where is this function?
+    switch(proc->getPriority()) {
 
         case 1: 
             if (m_queue_min.count() > 0)

@@ -83,6 +83,9 @@ Process::PriorityLevel Process:: getPriority() const
     return m_priority;
 }
 
+void Process::setPriority(PriorityLevel priorityLevel){
+    m_priority = priorityLevel;
+}
 Process::State Process::getState() const
 {
     return m_state;

@@ -26,10 +26,10 @@
 Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
-    parser().setDescription("Change the priority level of a process");
-    parser().registerFlag('n', "prio", "optional flag for setting priority");
-    parser().registerPositional("priority", "new priority level for the process (1-5)");
-    parser().registerPositional("process_id", "ID of the process to change priority for");
+    parser().setDescription("Changes a process's priority level");
+    parser().registerFlag('n', "priorityn", "priority level flag");
+    parser().registerPositional("priority", "set priority level");
+    parser().registerPositional("pid", "ID of the process to change priority for");
 }
 
 Renice::~Renice() {
@@ -37,23 +37,24 @@ Renice::~Renice() {
 
 Renice::Result Renice::exec(){
 
-    unsigned int priority = atoi(arguments().get("priority"));
-
+    PriorityLevel priority = atoi(arguments().get("priority"));
     if (priority < 1 || priority > 5){
-        ERROR("invalid priority level `" << priority << "'");
+        ERROR("Invalid priority level");
         return InvalidArgument;
     }
 
-    pid_t pid = atoi(arguments().get("process_id"));
-
+    pid_t pid = atoi(arguments().get("pid"));
     if (pid < 0){
-        ERROR("invalid process id");
+        ERROR("Invalid process id");
         return InvalidArgument;
     }
 
-    if (setprio(pid, priority, 0) != pid)
+    if (changePriority(pid, priority, 0) != pid)
     {
-        ERROR("renice failed: " << strerror(errno));
+        ERROR("Renice failed");
         return IOError;
     }
+
+
+
 }
