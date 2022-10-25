@@ -3,7 +3,7 @@
 #include "unistd.h"
 #include "errno.h"
 
-pid_t setprio(pid_t pid, unsigned int priority, int options)
+pid_t changePriority(pid_t pid, PriorityLevel priority, int options)
 {
     const ProcessClient process;
     ProcessClient::Info info;
@@ -13,10 +13,9 @@ pid_t setprio(pid_t pid, unsigned int priority, int options)
         errno = ESRCH;
         return (pid_t) -1;
     }
+    info.priority = priority;
 
-    info.kernelState.priority = priority;
-
-    const ulong result = (ulong) ProcessCtl(pid, SetPrioPID, (Address) &info.kernelState);
+    const ulong result = (ulong) ProcessCtl(pid, SetPriority, (Address) &info.kernelState);
 
     switch ((const API::Result) (result & 0xffff))
     {
